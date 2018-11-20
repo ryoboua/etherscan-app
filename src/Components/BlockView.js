@@ -41,15 +41,13 @@ class BlockView extends Component {
                             <h3>Fetching Block Data...</h3>
                         </div>
                     )}
-                    
+
+                    <h1>Block Transactions</h1>
                     { blockData !== null ? 
                     blockData.transactions.map((tx, i) => (
-                    <React.Fragment>
-                        <h1>Block Transactions</h1>
                         <TransactionCard key={i} tx={tx} getAccountData={() => null} />
-                    </React.Fragment>
-
-                    )):(
+                    ))
+                    :(
                     <div style={{ textAlign: 'center', paddingTop: '1em' }}>
                         <Loader type="Triangle" color="Black" height="100" width="100" />
                         <h3>Fetching Block Transactions...</h3>
