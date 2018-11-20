@@ -35,40 +35,28 @@ class AccountView extends Component {
                 wrap
             >   
                 <h1>Account Overview</h1>
-                { etherBalance !== null ? <AccountOverview etherBalance={etherBalance} totalTransaction={transactionList.length} address={address} /> : (
+                { 
+                    etherBalance !== null ? 
+                    <AccountOverview etherBalance={etherBalance} totalTransaction={transactionList.length} address={address} /> 
+                    : (
                     <div style={{ textAlign: 'center', paddingTop: '1em' }}>
-                    <Loader
-                        type="Triangle"
-                        color="Black"
-                        height="100"	
-                        width="100"
-                    />
-                    <h3>Fetching Account Info...</h3>
-                </div>
-                    
-                ) }
+                        <Loader type="Triangle" color="Black" height="100" width="100" />
+                        <h3>Fetching Account Info...</h3>
+                    </div>
+                ) 
+                }
                 <h1>Recent Transactions</h1>
-                { transactionList !== null ? transactionList.map((tx, i) => <TransactionCard key={i} tx={tx} getAccountData={this.getAccountData}  />) : (
+                { 
+                    transactionList !== null ? 
+                    transactionList.map((tx, i) => <TransactionCard key={i} tx={tx} getAccountData={this.getAccountData}  />) 
+                    : (
                     <div style={{ textAlign: 'center', paddingTop: '1em' }}>
-                    <Loader
-                        type="Triangle"
-                        color="Black"
-                        height="100"	
-                        width="100"
-                    />
+                        <Loader type="Triangle" color="Black" height="100" width="100" />
                     <h3>Fetching Transactions...</h3>
                 </div>
                 ) }
             </Box>
         )
-    }
-}
-
-AccountView.defaultProps = {
-    match: {
-        params: {
-            address: 'This is an AccountView'
-        }
     }
 }
 

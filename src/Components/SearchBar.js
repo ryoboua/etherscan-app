@@ -2,36 +2,8 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Box, Button, Grommet, TextInput } from 'grommet'
 import { isAddress, isHexStrict } from 'web3-utils'
-
-const theme = {
-    global: {
-      colors: {
-        brand: 'neutral-3',
-        accent: {
-  
-        }
-      },
-      font: {
-        family: 'Roboto',
-        size: '14px',
-        height: '20px',
-      },
-    },
-    button: {
-      border: {
-        color: 'status-error',
-        width: '3px'
-      },
-      color: 'black',
-      primary: {
-        color: 'neutral-4'
-      }
-    }
-  };
-
-function isBlockNumber(num){
-   return !isNaN(Number(num))
-}
+import { isBlockNumber } from '../helpers'
+import theme from './theme'
 
 class SearchBar extends Component {
     state = {

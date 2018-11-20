@@ -7,4 +7,8 @@ export function getDate(timeStamp){
     return `${date.date()}/${date.month() + 1} ${date.year()}`
   }
 
+export function isBlockNumber(num){
+    return !isNaN(Number(num))
+ }
+
 export const toNumber = num => isHexStrict(num) ? hexToNumber(num) : num

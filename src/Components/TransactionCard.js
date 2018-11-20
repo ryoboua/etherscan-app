@@ -3,33 +3,8 @@ import { Box, Grommet } from 'grommet'
 import { Link } from 'react-router-dom'
 import { fromWei, hexToNumber } from 'web3-utils'
 import { getDate, toNumber } from '../helpers'
+import theme from './theme'
 
-
-const theme = {
-    global: {
-      colors: {
-        brand: 'neutral-3',
-        accent: {
-  
-        }
-      },
-      font: {
-        family: 'Roboto',
-        size: '14px',
-        height: '20px',
-      },
-    },
-    button: {
-      border: {
-        color: 'status-error',
-        width: '3px'
-      },
-      color: 'black',
-      primary: {
-        color: 'neutral-4'
-      }
-    }
-  };
 
 export default ({ tx, getAccountData }) => {      
     return (
