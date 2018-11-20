@@ -5,7 +5,6 @@ import { fromWei, hexToNumber } from 'web3-utils'
 import { getDate, toNumber } from '../helpers'
 import theme from './theme'
 
-
 export default ({ tx, getAccountData }) => {      
     return (
         <Grommet theme={theme}>
