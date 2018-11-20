@@ -2,6 +2,7 @@ import React from 'react'
 import { Box, Grommet } from 'grommet'
 import { Link } from 'react-router-dom'
 import { getDate, toNumber } from '../helpers'
+import { hexToNumber } from 'web3-utils'
 import theme from './theme'
 
 export default ({ blockNumber, blockData}) => {      
@@ -29,7 +30,7 @@ export default ({ blockNumber, blockData}) => {
                     </div>
                     <div style={{padding: '0 2em'}} >
                         <h3>
-                            Date Mined: {getDate(blockData.timestamp)}
+                            Date Mined: {getDate(hexToNumber(blockData.timestamp))}
                         </h3>
                     </div>
                     <div style={{padding: '0 2em'}} >
