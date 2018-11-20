@@ -30,7 +30,7 @@ export default ({ tx, getAccountData }) => {
 
                 <div style={{ padding: '0.5em 1em', marginLeft: '200px' }}>
                   <h3>
-                    Block Number <Link to={`/block/${tx.blockNumber}`} style={{ textDecoration: 'none', color: 'black' }} >{toNumber(tx.blockNumber)}</Link>
+                    Block Number <Link to={`/block/${toNumber(tx.blockNumber)}`} style={{ textDecoration: 'none', color: 'black' }} >{toNumber(tx.blockNumber)}</Link>
                   </h3>
                 </div>
               </div>
