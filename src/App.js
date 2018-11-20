@@ -1,26 +1,30 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import ScrollTop from './Components/ScrollToTop'
+import SearchBar from './Components/SearchBar'
+import AddressView from './Components/AccountView'
+import BlockView from './Components/BlockView'
+import TransactionView from './Components/TransactionView'
 
 class App extends Component {
+  state = {}
+  componentDidMount(){
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <React.Fragment>
+          <ScrollTop>
+            <h1 style={{ textAlign: 'center' }}>Ethereum Block Explorer</h1>
+            <SearchBar />
+            <Route path="/address/:address" component={AddressView} />
+            <Route path="/block/:blockNumber" component={BlockView} />
+            <Route path="/tx/:txHash" component={TransactionView} />
+          </ScrollTop>
+        </React.Fragment>
+      </Router>
     );
   }
 }
