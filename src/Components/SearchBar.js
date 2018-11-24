@@ -7,7 +7,7 @@ import theme from './theme'
 
 class SearchBar extends Component {
     state = {
-        searchParam: '0xf149d7a772a5dd8811a45a898c4766a316d3718e',
+        searchParam: '',
     }
 
     handleChange = e => this.setState({ searchParam: e.target.value })
