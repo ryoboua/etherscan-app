@@ -2,8 +2,8 @@ import React from 'react'
 import { Box, Grommet } from 'grommet'
 import { Link } from 'react-router-dom'
 import { fromWei, hexToNumber } from 'web3-utils'
-import { getDate, toNumber } from '../helpers'
-import theme from './theme'
+import { getDate, toNumber } from '../../helpers'
+import theme from '../theme'
 
 export default ({ tx, getAccountData }) => {      
     return (

@@ -1,30 +1,25 @@
 import React, { Component } from 'react'
-import EtherScan from '../ether_scan_api'
 import Loader from 'react-loader-spinner'
 import AccountOverview from './AccountOverview'
-import TransactionCard from './TransactionCard';
+import TransactionCard from '../Transaction/TransactionCard';
 import { Box } from 'grommet'
 
-class AccountView extends Component {
+export default class AccountView extends Component {
 
-    state = {
-        etherBalance: null,
-        transactionList: null,
-        totalTransaction: null,
-    }
-
-    async componentDidMount(){
+    componentDidMount(){
         const { address } = this.props.match.params
-        this.getAccountData(address)
+        this.props.loadAccountData(address)
     }
-    getAccountData = async address => {
-        const { result: etherBalance } = await EtherScan.account.balance(address)
-        const { result: transactionList } = await EtherScan.account.txlist(address, 1, 'latest', 'desc')
 
-        return this.setState({ etherBalance, transactionList })
+    componentDidUpdate(prevProps) {
+        const { address } = this.props.match.params
+        if (address !== prevProps.match.params.address) {
+            this.props.loadAccountData(address)
+        }
     }
+
     render(){
-        const { transactionList, etherBalance } = this.state
+        const { transactionList, etherBalance } = this.props.accountData
         const { address } = this.props.match.params
 
         return (
@@ -48,7 +43,7 @@ class AccountView extends Component {
                 <h1>Recent Transactions</h1>
                 { 
                     transactionList !== null ? 
-                    transactionList.map((tx, i) => <TransactionCard key={i} tx={tx} getAccountData={this.getAccountData}  />) 
+                    transactionList.map((tx, i) => <TransactionCard key={i} tx={tx} loadAccountData={this.loadAccountData}  />) 
                     : (
                     <div style={{ textAlign: 'center', paddingTop: '1em' }}>
                         <Loader type="Triangle" color="Black" height="100" width="100" />
@@ -59,5 +54,3 @@ class AccountView extends Component {
         )
     }
 }
-
-export default AccountView

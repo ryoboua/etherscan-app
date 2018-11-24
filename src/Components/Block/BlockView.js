@@ -1,28 +1,26 @@
 import React, { Component } from 'react'
-import TransactionCard from './TransactionCard'
+import TransactionCard from '../Transaction/TransactionCard'
 import Loader from 'react-loader-spinner'
 import { Box, Grommet } from 'grommet'
-import { toHex } from 'web3-utils'
-import EtherScan from '../ether_scan_api'
 import BlockOverview from './BlockOverview';
 
-class BlockView extends Component {
-    state = {
-        blockData: null,
-    }
+export default class BlockView extends Component {
 
     componentDidMount(){
         const { blockNumber } = this.props.match.params
-        this.getBlockData(blockNumber)
+        this.props.loadBlockData(blockNumber)
     }
-    getBlockData = async blockNumber => {
-        const {result: blockData } = await EtherScan.proxy.eth_getBlockByNumber(toHex(blockNumber))
-        return this.setState({ blockData })
+
+    componentDidUpdate(prevProps) {
+        const { blockNumber } = this.props.match.params
+        if (blockNumber !== prevProps.match.params.address) {
+            this.props.loadBlockData(blockNumber)
+        }
     }
 
     render(){
         const { blockNumber } = this.props.match.params
-        const { blockData } = this.state
+        const { blockData } = this.props
         return (
             <Grommet>
                 <Box
@@ -59,5 +57,3 @@ class BlockView extends Component {
         )
     }
 }
-
-export default BlockView

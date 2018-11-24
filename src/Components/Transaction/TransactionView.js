@@ -1,24 +1,23 @@
 import React, { Component } from 'react'
 import TransactionCard from './TransactionCard'
-import EtherScan from '../ether_scan_api'
 import Loader from 'react-loader-spinner'
 
 export default class TransactionView extends Component {
-    state = {
-        txData: null,
-    }
 
     componentDidMount(){
         const { txHash } = this.props.match.params
-        this.getTxData(txHash)
+        this.props.loadTxData(txHash)
     }
-    getTxData = async txHash => {
-        const { result: txData } = await EtherScan.proxy.eth_getTransactionByHash(txHash)
-        return this.setState({ txData })
+
+    componentDidUpdate(prevProps) {
+        const { txHash } = this.props.match.params
+        if (txHash !== prevProps.match.params.address) {
+            this.props.loadTxData(txHash)
+        }
     }
 
     render(){
-        const { txData } = this.state
+        const { txData } = this.props
         return txData !== null ? (
             <div style={{ display: 'flex', justifyContent: 'center' }} >
                 <TransactionCard tx={txData} />
@@ -38,4 +37,4 @@ export default class TransactionView extends Component {
 
         )
     }       
-    }
+}

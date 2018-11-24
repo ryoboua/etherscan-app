@@ -7,14 +7,14 @@ import theme from './theme'
 
 class SearchBar extends Component {
     state = {
-        searchParam: '',
+        searchParam: '0xf149d7a772a5dd8811a45a898c4766a316d3718e',
     }
 
     handleChange = e => this.setState({ searchParam: e.target.value })
 
     handleSearch = () => {
         const { searchParam } = this.state
-        const { history } = this.props
+        const { history, location } = this.props
 
         if(searchParam === ''){
             alert('Please enter an Ethereum Account Address, Transaction Hash or Block Number')
@@ -53,28 +53,24 @@ class SearchBar extends Component {
                         onChange={this.handleChange}
                     />
                     <div style={{ textAlign: 'center', marginTop: '1em'}}>
-                    <Button 
-                        label="Search"
-                        style={{
-                            width: '100px',
-                            marginRight: '1em'
-                        }}
-                        onClick={this.handleSearch}
-                    />
-                    <Button 
-                        label="Clear"
-                        style={{
-                            width: '100px',
-                        }}
-                        onClick={this.handleClear}
-                    />
-                </div>
-
+                        <Button 
+                            label="Search"
+                            style={{
+                                width: '100px',
+                                marginRight: '1em'
+                            }}
+                            onClick={this.handleSearch}
+                        />
+                        <Button 
+                            label="Clear"
+                            style={{
+                                width: '100px',
+                            }}
+                            onClick={this.handleClear}
+                        />
+                    </div>  
                 </Box>
-
             </Grommet>
-
-
         )
     }
 }

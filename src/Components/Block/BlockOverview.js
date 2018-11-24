@@ -1,9 +1,9 @@
 import React from 'react'
 import { Box, Grommet } from 'grommet'
 import { Link } from 'react-router-dom'
-import { getDate, toNumber } from '../helpers'
+import { getDate, toNumber } from '../../helpers'
 import { hexToNumber } from 'web3-utils'
-import theme from './theme'
+import theme from '../theme'
 
 export default ({ blockNumber, blockData}) => {      
     return (

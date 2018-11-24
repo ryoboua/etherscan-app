@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, Grommet } from 'grommet'
 import { fromWei } from 'web3-utils'
-import theme from './theme'
+import theme from '../theme'
 
 export default ({ address, etherBalance, totalTransaction }) => {      
     return (
