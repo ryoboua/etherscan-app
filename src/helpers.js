@@ -11,3 +11,12 @@ export function isBlockNumber(num){
  }
 
 export const toNumber = num => isHexStrict(num) ? hexToNumber(num) : num
+
+export function isEmpty(prop){
+  return (
+      prop === null ||
+      prop === undefined ||
+      (prop.hasOwnProperty('length') && prop.length === 0) || //check if array and length
+      (prop.contructor === Object && Object.keys(prop).length ===0) // check if object
+  )
+}

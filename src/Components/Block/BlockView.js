@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import TransactionCard from '../Transaction/TransactionCard'
-import Loader from 'react-loader-spinner'
+import Loader from '../Loader'
 import { Box, Grommet } from 'grommet'
 import BlockOverview from './BlockOverview';
+import { isEmpty } from '../../helpers'
 
 export default class BlockView extends Component {
 
@@ -31,26 +32,17 @@ export default class BlockView extends Component {
                 >
                     <h1 style={{ textAlign: 'center' }}>Block Overview</h1>
                     {
-                        blockData !== null ? 
+                        isEmpty(blockData) ? <Loader /> : 
                         <BlockOverview blockNumber={blockNumber} blockData={blockData} /> 
-                        : (
-                        <div style={{ textAlign: 'center', paddingTop: '1em' }}>
-                            <Loader type="Triangle" color="Black" height="100" width="100" />
-                            <h3>Fetching Block Data...</h3>
-                        </div>
-                    )}
+                    }
 
                     <h1>Block Transactions</h1>
-                    { blockData !== null ? 
-                    blockData.transactions.map((tx, i) => (
-                        <TransactionCard key={i} tx={tx} getAccountData={() => null} />
-                    ))
-                    :(
-                    <div style={{ textAlign: 'center', paddingTop: '1em' }}>
-                        <Loader type="Triangle" color="Black" height="100" width="100" />
-                        <h3>Fetching Block Transactions...</h3>
-                    </div>
-                    ) }
+                    {                         
+                        isEmpty(blockData) ? <Loader /> :
+                        blockData.transactions.map((tx, i) => (
+                            <TransactionCard key={i} tx={tx} getAccountData={() => null} />
+                        ))
+                    }
                 </Box>
             </Grommet>
 
