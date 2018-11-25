@@ -18,15 +18,15 @@ class App extends Component {
     txData: null,
   }
 
-loadAccountData = address => client.fetchAccountData(address)
-                            .then(res => this.setState({ accountData: {...this.state.accountData, ...res} }))
-                
-loadBlockData = blockNumber => client.fetchBlockData(blockNumber)
-                              .then(blockData => this.setState({ blockData }))
+  loadAccountData = address => client.fetchAccountData(address)
+                              .then(res => this.setState({ accountData: {...this.state.accountData, ...res} }))
+                  
+  loadBlockData = blockNumber => client.fetchBlockData(blockNumber)
+                                .then(blockData => this.setState({ blockData }))
 
-loadTxData = txHash => client.fetchTxData(txHash)
-                              .then(txData => this.setState({ txData }))
-                                   
+  loadTxData = txHash => client.fetchTxData(txHash)
+                                .then(txData => this.setState({ txData }))
+                                    
   render() {
     const { accountData, blockData, txData } = this.state
 
