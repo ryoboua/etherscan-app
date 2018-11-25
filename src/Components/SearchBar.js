@@ -41,7 +41,9 @@ class SearchBar extends Component {
                 <Box
                 width="medium"
                 style={{
-                    margin: '50px auto'
+                    margin: '10px auto',
+                    textAlign: 'center'
+
                 }}
                 >
                     <p>Search by Address, Transaction Hash or Block Number</p>
