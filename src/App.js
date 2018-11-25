@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 import ScrollTop from './Components/ScrollToTop'
 import SearchBar from './Components/SearchBar'
+import EthereumLogo from './Components/EthereumLogo'
 import { AccountRoute, BlockRoute, TxRoute } from './Routes/index'
 
 import client from './client'
@@ -33,7 +34,7 @@ loadTxData = txHash => client.fetchTxData(txHash)
       <Router>
         <React.Fragment>
           <ScrollTop>
-            <h1 style={{ textAlign: 'center' }}>Ethereum Block Explorer</h1>
+            <EthereumLogo />
             <SearchBar />
               <AccountRoute 
                 path="/address/:address" 
