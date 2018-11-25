@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import Loader from 'react-loader-spinner'
 import AccountOverview from './AccountOverview'
 import TransactionCard from '../Transaction/TransactionCard';
+import Loader from '../Loader'
 import { Box } from 'grommet'
+import { isEmpty } from '../../helpers'
 
 export default class AccountView extends Component {
 
@@ -31,25 +32,14 @@ export default class AccountView extends Component {
             >   
                 <h1>Account Overview</h1>
                 { 
-                    etherBalance !== null ? 
+                    isEmpty(etherBalance) ? <Loader /> :
                     <AccountOverview etherBalance={etherBalance} totalTransaction={transactionList.length} address={address} /> 
-                    : (
-                    <div style={{ textAlign: 'center', paddingTop: '1em' }}>
-                        <Loader type="Triangle" color="Black" height="100" width="100" />
-                        <h3>Fetching Account Info...</h3>
-                    </div>
-                ) 
                 }
                 <h1>Recent Transactions</h1>
                 { 
-                    transactionList !== null ? 
+                    isEmpty(transactionList) ? <Loader /> :
                     transactionList.map((tx, i) => <TransactionCard key={i} tx={tx} loadAccountData={this.loadAccountData}  />) 
-                    : (
-                    <div style={{ textAlign: 'center', paddingTop: '1em' }}>
-                        <Loader type="Triangle" color="Black" height="100" width="100" />
-                    <h3>Fetching Transactions...</h3>
-                </div>
-                ) }
+                }
             </Box>
         )
     }
