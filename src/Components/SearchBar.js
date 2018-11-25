@@ -14,7 +14,7 @@ class SearchBar extends Component {
 
     handleSearch = () => {
         const { searchParam } = this.state
-        const { history, location } = this.props
+        const { history } = this.props
 
         if(searchParam === ''){
             alert('Please enter an Ethereum Account Address, Transaction Hash or Block Number')
