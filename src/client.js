@@ -1,25 +1,68 @@
-import EtherScan from './ether_scan_api'
-import { toHex } from 'web3-utils'
+import EtherScan from "./ether_scan_api"
+import { toHex } from "web3-utils"
 
 async function fetchAccountData(address) {
-    let { result: etherBalance } = await EtherScan.account.balance(address)
-    let { result: transactionList } = await EtherScan.account.txlist(address, 1, 'latest', 'desc')
-    
-    etherBalance = etherBalance !== null ? etherBalance : 'N/A'
-    transactionList = transactionList !== null ? transactionList : 'N/A'
+  const etherBalance = await EtherScan.account
+    .balance(address)
+    .then(handleResponse)
+    .catch(handleErrors)
+  const transactionList = await fetchAccountTransactionList(address)
+  const totalTransactionCount = await fetchTotalTransactionCount(address)
 
-    return { etherBalance , transactionList }
+  return {
+    etherBalance,
+    transactionList,
+    totalTransactionCount,
+  }
 }
 
 async function fetchBlockData(blockNumber) {
-    const {result: blockData } = await EtherScan.proxy.eth_getBlockByNumber(toHex(blockNumber))
-
-    return blockData !== null ? blockData : 'N/A'
+  const blockData = await EtherScan.proxy
+    .eth_getBlockByNumber(toHex(blockNumber))
+    .then(handleResponse)
+    .catch(handleErrors)
+  return blockData
 }
 
 async function fetchTxData(txHash) {
-    const { result: txData } = await EtherScan.proxy.eth_getTransactionByHash(txHash)
-    return txData !== null ? txData : 'N/A' 
+  const txData = await EtherScan.proxy
+    .eth_getTransactionByHash(txHash)
+    .then(handleResponse)
+    .catch(handleErrors)
+  return txData
 }
 
-export default { fetchAccountData, fetchBlockData, fetchTxData }
+async function fetchAccountTransactionList(address, page = 1) {
+  const transactionList = await EtherScan.account
+    .getTxListPerPage(address, page)
+    .then(handleResponse)
+    .catch(handleErrors)
+  return transactionList
+}
+
+async function fetchTotalTransactionCount(address) {
+  const totalTransactionCount = await EtherScan.proxy
+    .eth_getTransactionCount(address)
+    .then(handleResponse)
+    .catch(handleErrors)
+  return totalTransactionCount
+}
+
+function handleResponse(res) {
+  if (res.result === null || res.result === undefined) {
+    return "N/A"
+  } else {
+    return res.result
+  }
+}
+
+function handleErrors(res) {
+  return "N/A"
+}
+
+export default {
+  fetchAccountData,
+  fetchBlockData,
+  fetchTxData,
+  fetchAccountTransactionList
+}
