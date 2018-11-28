@@ -44,12 +44,12 @@ export default ({ tx, getAccountData }) => {
               </div>
               <div style={{padding: '0.5em 2em'}} >
                 <h3>
-                  From: <Link onClick={() => getAccountData(tx.from)} to={`/address/${tx.from}`} style={{ textDecoration: 'none', color: 'black' }}>{tx.from}</Link>
+                  From: <Link to={`/address/${tx.from}`} style={{ textDecoration: 'none', color: 'black' }}>{tx.from}</Link>
                 </h3>
               </div>
               <div style={{padding: '0.5em 2em'}} >
                 <h3>
-                  To: <Link onClick={() => getAccountData(tx.to)} to={`/address/${tx.to}`} style={{ textDecoration: 'none', color: 'black' }}>{tx.to}</Link>
+                  To: <Link to={`/address/${tx.to}`} style={{ textDecoration: 'none', color: 'black' }}>{tx.to}</Link>
                 </h3>
               </div>
             </Box>
