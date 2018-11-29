@@ -1,4 +1,4 @@
-import React, { Component } from "react"
+import React, { Component, Fragment } from "react"
 import { BrowserRouter as Router } from "react-router-dom"
 
 import ScrollTop from "./Components/ScrollToTop"
@@ -19,12 +19,25 @@ class App extends Component {
     txData: null
   }
 
+  setStateAsync = state => {
+    return new Promise(resolve => {
+      this.setState(state, resolve)
+    })
+  }
+
   loadAccountData = address =>
-    client
-      .fetchAccountData(address)
-      .then(res =>
-        this.setState({ accountData: { ...this.state.accountData, ...res } })
-      )
+    client.fetchAccountData(address).then(async res => {
+      await this.setStateAsync({
+        accountData: {
+          etherBalance: null,
+          transactionList: null,
+          totalTransactionCount: null
+        }
+      })
+      return this.setState({
+        accountData: { ...this.state.accountData, ...res }
+      })
+    })
 
   loadBlockData = blockNumber =>
     client
@@ -55,13 +68,12 @@ class App extends Component {
       loadAccountData,
       loadTransactionList,
       loadBlockData,
-      loadTxData,
-      loadTotalTransactionCount
+      loadTxData
     } = this
 
     return (
       <Router>
-        <React.Fragment>
+        <Fragment>
           <ScrollTop>
             <Title />
             <SearchBar />
@@ -82,7 +94,7 @@ class App extends Component {
               loadTxData={loadTxData}
             />
           </ScrollTop>
-        </React.Fragment>
+        </Fragment>
       </Router>
     )
   }
