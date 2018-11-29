@@ -2,6 +2,8 @@
 
 A React.js and Ethereum project
 
+See live alpha version at https://gallant-brown-dfad0f.netlify.com/address/0xe7d0b8585621ada2f113c4a363746d80babefd9f
+
 ## How to run
 
 # install dependencies
