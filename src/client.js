@@ -12,7 +12,7 @@ async function fetchAccountData(address) {
   return {
     etherBalance,
     transactionList,
-    totalTransactionCount,
+    totalTransactionCount
   }
 }
 
@@ -64,5 +64,5 @@ export default {
   fetchAccountData,
   fetchBlockData,
   fetchTxData,
-  fetchAccountTransactionList
+  fetchAccountTransactionList,
 }
