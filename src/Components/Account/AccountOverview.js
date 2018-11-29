@@ -1,7 +1,7 @@
-import React from "react";
-import { Box, Grommet } from "grommet";
-import { fromWei, hexToNumberString } from "web3-utils";
-import theme from "../theme";
+import React from "react"
+import { Box, Grommet } from "grommet"
+import { fromWei, hexToNumberString } from "web3-utils"
+import theme from "../theme"
 
 export default ({ address, etherBalance, totalTransaction }) => {
   return (
@@ -30,5 +30,5 @@ export default ({ address, etherBalance, totalTransaction }) => {
         </div>
       </Box>
     </Grommet>
-  );
-};
+  )
+}
